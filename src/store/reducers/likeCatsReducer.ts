@@ -3,6 +3,7 @@ import { ICat } from "../../models/ICat";
 
 interface CatsState {
     isLikeLoading: boolean,
+    fetched: boolean
     likeError: null | string,
     likeCats: ICat[],
 }
@@ -11,6 +12,7 @@ const initialState: CatsState = {
     isLikeLoading: false,
     likeError: null,
     likeCats: [],
+    fetched: false
 }
 
 const likeCatsReducer = createSlice({
@@ -32,9 +34,13 @@ const likeCatsReducer = createSlice({
         cancelLikeCat(state, action: PayloadAction<string>) {
             state.likeCats = state.likeCats.filter(cat => cat.id !== action.payload);
         },
+
+        setFetched(state, action: PayloadAction<boolean>) {
+            state.fetched = action.payload
+        }
     }
 })
 
 
-export const { addLikeCat, cancelLikeCat, setIsLikeLoading, setLikeError} = likeCatsReducer.actions
+export const { addLikeCat, cancelLikeCat, setIsLikeLoading, setLikeError, setFetched} = likeCatsReducer.actions
 export default likeCatsReducer.reducer

@@ -9,7 +9,9 @@ export class DBService {
         localStorage.setItem('cats', JSON.stringify(json))
     }
 
-    static fetch() {
+    static async fetch() {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        
         const data = localStorage.getItem('cats') || '[]';
         const json: ICat[] = JSON.parse(data);
         return json

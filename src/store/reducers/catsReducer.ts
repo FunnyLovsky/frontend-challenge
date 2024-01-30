@@ -10,7 +10,7 @@ interface CatsState {
 }
 
 const initialState: CatsState = {
-    isLoading: false,
+    isLoading: true,
     error: null,
     cats: [],
     page: 0,
@@ -37,10 +37,14 @@ const catsReducer = createSlice({
             state.cats = state.cats.map((cat) => 
                 cat.id === action.payload.id ? {...cat, isLike: action.payload.isLike} : cat
             )
+        },
+
+        nextPage(state) {
+            state.page += 1;
         }
     }
 })
 
 
-export const {addCats, setError, setIsLoading, setIsLike} = catsReducer.actions
+export const {addCats, setError, setIsLoading, setIsLike, nextPage} = catsReducer.actions
 export default catsReducer.reducer

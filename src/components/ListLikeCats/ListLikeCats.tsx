@@ -1,21 +1,30 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import styles from "./style.module.scss";
+// import styles from "./style.module.scss";
 import { useActions, useAppSelector } from "../../store/hooks";
 import { useEffect } from "react";
 import Cat from "../Cat/Cat";
+import Container from "../Container/Container";
 
 const ListLikeCats = () => {
-    const { likeCats } = useAppSelector(state => state.likeCatsReducer);
+    const { likeCats, isLikeLoading, fetched } = useAppSelector(state => state.likeCatsReducer);
     const { fetchLikeCats } = useActions()
 
     useEffect(() => {
-        if(likeCats.length === 0) {
+        if(!fetched) {
             fetchLikeCats();
         }
     }, [])
+
+    if(isLikeLoading) {
+        return(
+            <Container>
+                <h1>Загрузка котиков...</h1>
+            </Container>
+        )
+    }
     
     return(
-        <div className={styles.inner}>
+        <Container>
             {likeCats.length === 0 
                 ? 
                 <h1>У вас пока нет любимых котиков =(</h1>
@@ -25,7 +34,7 @@ const ListLikeCats = () => {
                 )
             } 
             
-        </div>
+        </Container>
     )
 }
 

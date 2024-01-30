@@ -7,7 +7,7 @@ export class CatsService {
 
         if(response.ok) {
             const cats: ICat[] = await response.json()
-            return cats.map(({url, id}) => ({id, url, isLike: false}))
+            return cats.map(({url, id}) => ({id: id + Date.now().toString(16), url, isLike: false}))
         }
     }
 }

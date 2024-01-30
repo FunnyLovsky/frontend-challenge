@@ -24,7 +24,7 @@ const Cat: FC<IProps> = ({ cat }) => {
     }
 
     return(
-        <div className={styles.item} style={{background: isLoad ? '' : 'grey'}}>
+        <div className={styles.item} style={{background: isLoad ? '' : '#2196F3'}}>
             <div 
                 className={styles.favorite_block} 
                 onClick={setActiveHandler}
