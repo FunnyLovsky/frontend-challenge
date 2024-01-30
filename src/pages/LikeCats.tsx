@@ -1,6 +1,8 @@
+import ListLikeCats from "../components/ListLikeCats/ListLikeCats";
+
 const LikeCats = () => {
     return(
-        <h1>LikeCats</h1>
+        <ListLikeCats/>
     )
 }
 

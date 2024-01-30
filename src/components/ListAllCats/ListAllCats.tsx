@@ -1,20 +1,30 @@
-import { useEffect, useState } from "react";
-import { IItem } from "../../models/IItem";
-import ListItem from "../ListItem/ListItem";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from "react";
 import styles from "./style.module.scss";
+import { useActions, useAppSelector } from "../../store/hooks";
+import Cat from "../Cat/Cat";
 
 const ListAllCats = () => {
-    const [items, setItems] = useState<IItem[]>([])
+    const {cats, isLoading} = useAppSelector(state => state.catsReducer);
+    const {fetchCats} = useActions()
 
     useEffect(() => {
-        fetch('https://api.thecatapi.com/v1/images/search?page=0&limit=15&api_key=live_iTqDEeNZDYAPRiNju0P3rF2EWQ0qup77PmzHfIpMvpOPfmvic2fNSt9pu4ztaJFqE')
-            .then(res => res.json())
-            .then(json => setItems(json))
+        if(cats.length === 0) {
+            fetchCats();
+        }
     }, [])
 
     return(
         <div className={styles.inner}>
-            <ListItem items={items}/>
+            {isLoading 
+                ? 
+                <h1>Загрузка котиков...</h1>
+                :
+                cats.map(item =>
+                    <Cat cat={item} key={item.id}/> 
+                )
+            }
+            
         </div>
     )
 }
