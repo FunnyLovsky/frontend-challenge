@@ -7,6 +7,7 @@ interface CatsState {
     cats: ICat[],
     page: number,
     limit: number,
+    isInfLoad: boolean
 }
 
 const initialState: CatsState = {
@@ -14,7 +15,8 @@ const initialState: CatsState = {
     error: null,
     cats: [],
     page: 0,
-    limit: 30
+    limit: 30,
+    isInfLoad: false
 }
 
 const catsReducer = createSlice({
@@ -41,10 +43,14 @@ const catsReducer = createSlice({
 
         nextPage(state) {
             state.page += 1;
-        }
+        },
+        
+        setIsInfLoading(state, action: PayloadAction<boolean>) {
+            state.isInfLoad = action.payload;
+        },
     }
 })
 
 
-export const {addCats, setError, setIsLoading, setIsLike, nextPage} = catsReducer.actions
+export const {addCats, setError, setIsLoading, setIsLike, nextPage, setIsInfLoading} = catsReducer.actions
 export default catsReducer.reducer
