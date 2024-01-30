@@ -1,0 +1,31 @@
+@import '../../styles/variables.scss';
+
+.notify {
+    width: 100%;
+    height: calc(100vh - 67px);
+    margin-top: 67px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & h1 {
+        margin-left: 20px;
+    }
+
+    & svg {
+        font-size: 70px;
+    }
+}
+
+      
+
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+} 
+  

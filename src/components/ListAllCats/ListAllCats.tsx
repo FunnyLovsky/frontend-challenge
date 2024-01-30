@@ -5,6 +5,7 @@ import { useActions, useAppSelector } from "../../store/hooks";
 import Cat from "../Cat/Cat";
 import { useInView } from "react-intersection-observer";
 import Container from "../Container/Container";
+import Loader from "../Loader/Loader";
 
 
 const ListAllCats = () => {
@@ -28,9 +29,7 @@ const ListAllCats = () => {
 
     if(isLoading) {
         return(
-            <Container>
-                <h1>Загрузка котиков...</h1>
-            </Container>
+            <Loader>Загрузка котиков...</Loader>
         )
     }
 
@@ -39,7 +38,9 @@ const ListAllCats = () => {
             {cats.map(item =>
                 <Cat cat={item} key={item.id}/> 
             )}
-            <h3 ref={ref} className={styles.child}>... загружаем еще котиков ...</h3>
+            <div ref={ref} className={styles.child}>
+                <span></span>
+            </div>
         </Container>
     )
 }

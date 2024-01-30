@@ -4,6 +4,8 @@ import { useActions, useAppSelector } from "../../store/hooks";
 import { useEffect } from "react";
 import Cat from "../Cat/Cat";
 import Container from "../Container/Container";
+import Loader from "../Loader/Loader";
+import Notify from "../Notify/Notify";
 
 const ListLikeCats = () => {
     const { likeCats, isLikeLoading, fetched } = useAppSelector(state => state.likeCatsReducer);
@@ -17,23 +19,21 @@ const ListLikeCats = () => {
 
     if(isLikeLoading) {
         return(
-            <Container>
-                <h1>Загрузка котиков...</h1>
-            </Container>
+            <Loader>Загрузка котиков...</Loader>
+        )
+    }
+
+    if(likeCats.length === 0) {
+        return(
+            <Notify>У вас пока нет любимых котиков</Notify>
         )
     }
     
     return(
         <Container>
-            {likeCats.length === 0 
-                ? 
-                <h1>У вас пока нет любимых котиков =(</h1>
-                :
-                likeCats.map(item =>
-                    <Cat cat={item} key={item.id}/> 
-                )
-            } 
-            
+            {likeCats.map(item =>
+                <Cat cat={item} key={item.id}/> 
+            )}
         </Container>
     )
 }

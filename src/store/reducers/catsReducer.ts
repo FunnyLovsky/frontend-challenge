@@ -14,7 +14,7 @@ const initialState: CatsState = {
     error: null,
     cats: [],
     page: 0,
-    limit: 20
+    limit: 30
 }
 
 const catsReducer = createSlice({
