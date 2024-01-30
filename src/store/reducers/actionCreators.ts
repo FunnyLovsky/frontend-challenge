@@ -2,15 +2,21 @@ import { AppDispatch, RootState } from ".."
 import { ICat } from "../../models/ICat";
 import { CatsService } from "../api/CatsService";
 import { DBService } from "../api/DBService";
-import { addCats, nextPage, setIsLike, setIsLoading } from "./catsReducer"
+import { addCats, nextPage, setError, setIsLike, setIsLoading } from "./catsReducer"
 import { setIsLikeLoading, cancelLikeCat, addLikeCat, setFetched } from './likeCatsReducer'
 
 const fetchCats = () => async (dispatch: AppDispatch, getState: () => RootState) => {
-    const { page, limit } = getState().catsReducer;
-    dispatch(setIsLoading(true));
-    const response = await CatsService.fetchCats(page, limit);
-    dispatch(addCats(response!));
-    dispatch(setIsLoading(false))
+    try {
+        const { page, limit } = getState().catsReducer;
+        dispatch(setIsLoading(true));
+        const response = await CatsService.fetchCats(page, limit);
+        dispatch(addCats(response!));
+        dispatch(setIsLoading(false))
+    } catch (error: any) {
+        dispatch(setIsLoading(false));
+        dispatch(setError(error.message))
+    }
+
 }
 
 const infFetchCats = () => async (dispatch: AppDispatch, getState: () => RootState) => {

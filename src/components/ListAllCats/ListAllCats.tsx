@@ -6,10 +6,11 @@ import Cat from "../Cat/Cat";
 import { useInView } from "react-intersection-observer";
 import Container from "../Container/Container";
 import Loader from "../Loader/Loader";
+import Notify from "../Notify/Notify";
 
 
 const ListAllCats = () => {
-    const {cats, isLoading} = useAppSelector(state => state.catsReducer);
+    const {cats, isLoading, error} = useAppSelector(state => state.catsReducer);
     const {fetchCats, infFetchCats} = useActions();
     const {ref, inView} = useInView();
 
@@ -29,7 +30,13 @@ const ListAllCats = () => {
 
     if(isLoading) {
         return(
-            <Loader>Загрузка котиков...</Loader>
+            <Loader>Ищем самых милых котиков для вас...</Loader>
+        )
+    }
+
+    if(error) {
+        return(
+            <Notify type="error">{error}</Notify>
         )
     }
 

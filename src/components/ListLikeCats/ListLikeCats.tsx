@@ -19,13 +19,13 @@ const ListLikeCats = () => {
 
     if(isLikeLoading) {
         return(
-            <Loader>Загрузка котиков...</Loader>
+            <Loader>Подгружаем ваших любимых пушистиков... </Loader>
         )
     }
 
     if(likeCats.length === 0) {
         return(
-            <Notify>У вас пока нет любимых котиков</Notify>
+            <Notify type="alert">Пока тишина! Добавьте котиков и сделайте это место мур-мур!</Notify>
         )
     }
     

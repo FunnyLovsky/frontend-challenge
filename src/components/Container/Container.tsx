@@ -7,9 +7,12 @@ interface IProps {
 
 const Container: FC<IProps> = ({children}) => {
     return(
-        <div className={styles.inner}>
-            {children}
+        <div className={styles.cont}>
+            <div className={styles.inner}>
+                {children}
+            </div>
         </div>
+
     )
 }
 
