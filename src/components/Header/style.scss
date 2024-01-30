@@ -1,0 +1,25 @@
+@import '../../styles/variables.scss';
+
+.link {
+    font-family: 'Roboto';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 21px; 
+    letter-spacing: 0.25px;
+    text-decoration: none;
+    color: $white;
+    background: $blue;
+    padding: 23px 15px;
+    transition: .3s;
+
+    &:hover {
+        background: darken($color: $blue, $amount: 5px);
+        color: $white_hover;
+    }
+}
+
+.active {
+    background: $blue_hover;
+    color: $white_hover;
+}
